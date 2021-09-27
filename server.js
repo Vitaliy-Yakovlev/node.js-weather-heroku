@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const got = require("got");
+const cors = require("cors");
 require("dotenv").config();
 const app = express();
 
@@ -8,7 +9,11 @@ const PORT = process.env.PORT || 5050;
 const BASE_URL = "http://api.weatherbit.io/v2.0/current";
 const KEY = process.env.KEY;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 app.use(morgan("tiny"));
+app.use(cors());
 
 app.get("/api/weather", async (req, res) => {
   try {
