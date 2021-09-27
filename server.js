@@ -33,17 +33,17 @@ app.get("/api/weather", async (req, res) => {
       },
       responseType: "json",
     });
-    res.json({ weather: response.body });
+    // res.json({ weather: response.body });
 
-    // const [weatherData] = response.body.data;
-    // const {
-    //   city_name,
-    //   timezone,
-    //   weather: { description },
-    //   temp,
-    // } = weatherData;
+    const [weatherData] = response.body.data;
+    const {
+      city_name,
+      timezone,
+      weather: { description },
+      temp,
+    } = weatherData;
 
-    // res.json({ city_name, timezone, description, temp });
+    res.json({ city_name, timezone, description, temp });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
