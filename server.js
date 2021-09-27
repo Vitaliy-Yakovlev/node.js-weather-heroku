@@ -42,7 +42,7 @@ app.get("/api/weather", async (req, res) => {
 
     res.json({ city_name, timezone, description, temp });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(700).json({ message: err.message });
   }
 });
 
