@@ -5,6 +5,8 @@ const cors = require("cors");
 require("dotenv").config();
 const app = express();
 
+const { router } = require("./contact");
+
 const PORT = process.env.PORT || 5050;
 const BASE_URL = "http://api.weatherbit.io/v2.0/current";
 const KEY = process.env.KEY;
@@ -14,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(morgan("tiny"));
 app.use(cors());
+app.use("/", router);
 
 app.get("/api/weather", async (req, res) => {
   try {
@@ -42,7 +45,7 @@ app.get("/api/weather", async (req, res) => {
 
     res.json({ city_name, timezone, description, temp });
   } catch (err) {
-    res.status(700).json({ message: err.message });
+    res.status(500).json({ message: err.message });
   }
 });
 
